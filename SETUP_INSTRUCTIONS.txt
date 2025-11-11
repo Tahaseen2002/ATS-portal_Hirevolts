@@ -1,0 +1,156 @@
+===================================================
+RECRUITMENT SYSTEM - SETUP INSTRUCTIONS
+===================================================
+
+This project includes:
+- Frontend: React + TypeScript (Vite)
+- Backend: Node.js + Express + MongoDB
+
+===================================================
+BACKEND SETUP
+===================================================
+
+1. UPDATE MONGODB PASSWORD
+   - Open: backend\.env
+   - Replace <db_password> with your actual MongoDB password
+   - The connection string should look like:
+     mongodb+srv://appUser:YOUR_ACTUAL_PASSWORD@cluster0.fvusuhm.mongodb.net/recruitment...
+
+2. INSTALL BACKEND DEPENDENCIES
+   - Double-click: install-backend.bat
+   OR
+   - Open terminal and run:
+     cd backend
+     npm install
+
+3. START BACKEND SERVER
+   - Double-click: start-backend.bat
+   OR
+   - Open terminal and run:
+     cd backend
+     npm run dev
+   
+   Server will run on: http://localhost:5000
+
+===================================================
+FRONTEND SETUP
+===================================================
+
+1. INSTALL FRONTEND DEPENDENCIES (if not already done)
+   - Open terminal and run:
+     npm install
+
+2. START FRONTEND
+   - Open terminal and run:
+     npm run dev
+   
+   Frontend will run on: http://localhost:5173
+
+===================================================
+USAGE
+===================================================
+
+ADDING CANDIDATES WITH RESUME PARSING:
+
+1. Click "Add Candidate" button
+2. Check "Parse candidate info from resume automatically"
+3. Upload a PDF or DOCX resume
+4. The system will automatically extract:
+   - Name
+   - Email
+   - Phone
+   - Skills
+   - Experience
+   - Education
+   - Location
+5. You can override any auto-filled fields manually
+6. Click "Add Candidate" to save
+
+ADDING CANDIDATES MANUALLY:
+
+1. Click "Add Candidate" button
+2. Uncheck "Parse candidate info from resume automatically"
+3. Fill in all required fields manually
+4. Optionally upload a resume
+5. Click "Add Candidate" to save
+
+===================================================
+API ENDPOINTS
+===================================================
+
+Candidates:
+- GET    /api/candidates              - Get all candidates
+- GET    /api/candidates/:id          - Get candidate by ID
+- POST   /api/candidates               - Create candidate manually
+- POST   /api/candidates/upload-resume - Upload resume and auto-create
+- PUT    /api/candidates/:id          - Update candidate
+- DELETE /api/candidates/:id          - Delete candidate
+
+Jobs:
+- GET    /api/jobs                    - Get all jobs
+- GET    /api/jobs/:id                - Get job by ID
+- POST   /api/jobs                    - Create job
+- PUT    /api/jobs/:id                - Update job
+- DELETE /api/jobs/:id                - Delete job
+- POST   /api/jobs/:jobId/candidates/:candidateId - Add candidate to job
+
+===================================================
+TROUBLESHOOTING
+===================================================
+
+1. "Cannot connect to MongoDB"
+   - Check your MongoDB password in backend\.env
+   - Ensure MongoDB Atlas cluster is running
+   - Check your IP is whitelisted in MongoDB Atlas
+
+2. "Port already in use"
+   - Change PORT in backend\.env to a different number (e.g., 5001)
+   - Update API_BASE_URL in src/api/index.ts to match
+
+3. "Resume parsing failed"
+   - Ensure resume is in PDF or DOCX format
+   - File size must be under 5MB
+   - Resume must contain basic contact information
+
+4. Frontend can't connect to backend
+   - Ensure backend server is running on http://localhost:5000
+   - Check browser console for CORS errors
+   - Verify API_BASE_URL in src/api/index.ts
+
+===================================================
+PROJECT STRUCTURE
+===================================================
+
+project/
+├── backend/                  # Backend server
+│   ├── src/
+│   │   ├── config/          # Database & upload config
+│   │   ├── controllers/     # Business logic
+│   │   ├── models/          # MongoDB schemas
+│   │   ├── routes/          # API routes
+│   │   ├── utils/           # Resume parser
+│   │   └── server.js        # Main server
+│   ├── uploads/             # Resume storage
+│   ├── .env                 # Environment variables
+│   └── package.json
+├── src/                     # Frontend source
+│   ├── api/                 # API client
+│   ├── components/          # React components
+│   └── types/               # TypeScript types
+└── package.json
+
+===================================================
+FEATURES
+===================================================
+
+✓ MongoDB integration for persistent storage
+✓ Resume parsing (PDF, DOCX)
+✓ Auto-extraction of candidate information
+✓ Manual candidate entry
+✓ Candidate listing and search
+✓ Job management
+✓ Responsive design
+✓ RESTful API
+✓ File upload handling
+
+===================================================
