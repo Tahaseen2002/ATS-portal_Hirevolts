@@ -1,10 +1,9 @@
 import { MapPin, Calendar, DollarSign, Briefcase, Users, Plus, Edit, Trash2 } from 'lucide-react';
+import { Job } from '../types';
 import { useState, useEffect } from 'react';
 import toast from 'react-hot-toast';
-import { Job } from '../types';
-import { jobApi, candidateApi } from '../api';
 import AddCandidateToJobModal from './AddCandidateToJobModal';
-
+import { jobApi, candidateApi } from '../api';
 
 interface JobDetailProps {
   job: Job;
