@@ -101,10 +101,23 @@ export default function CandidateDetail({ candidate, onEdit }: CandidateDetailPr
 
   const handleViewResume = () => {
     if (candidate.resumeUrl) {
-      // Convert backend path to URL
-      const resumeFileName = candidate.resumeUrl.split('\\').pop()?.split('/').pop();
-      const resumeUrl = `http://localhost:5000/uploads/${resumeFileName}`;
-      window.open(resumeUrl, '_blank');
+      // Check if it's a Cloudinary URL (starts with http)
+      if (candidate.resumeUrl.startsWith('http')) {
+        // For Cloudinary URLs, modify to display inline instead of download
+        let resumeUrl = candidate.resumeUrl;
+        
+        if (resumeUrl.includes('cloudinary.com')) {
+          // Add fl_attachment:false to force inline viewing instead of download
+          resumeUrl = resumeUrl.replace('/upload/', '/upload/fl_attachment:false/');
+        }
+        
+        window.open(resumeUrl, '_blank');
+      } else {
+        // Local file path - convert to URL
+        const resumeFileName = candidate.resumeUrl.split('\\').pop()?.split('/').pop();
+        const resumeUrl = `https://ats-portal-hirevolts.onrender.com/api/uploads/${resumeFileName}`;
+        window.open(resumeUrl, '_blank');
+      }
     }
   };
 

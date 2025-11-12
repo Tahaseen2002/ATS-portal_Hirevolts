@@ -1,4 +1,4 @@
-const API_BASE_URL = 'http://localhost:5000/api';
+const API_BASE_URL = 'https://ats-portal-hirevolts.onrender.com/api';
 
 export const candidateApi = {
   // Get all candidates
@@ -71,6 +71,17 @@ export const candidateApi = {
       method: 'DELETE'
     });
     if (!response.ok) throw new Error('Failed to delete candidate');
+    return response.json();
+  },
+
+  // Update candidate status
+  updateStatus: async (id: string, status: string) => {
+    const response = await fetch(`${API_BASE_URL}/candidates/${id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ status })
+    });
+    if (!response.ok) throw new Error('Failed to update candidate status');
     return response.json();
   }
 };

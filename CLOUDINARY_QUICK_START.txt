@@ -1,0 +1,55 @@
+╔═══════════════════════════════════════════════════════════════════════════╗
+║                    CLOUDINARY INTEGRATION - QUICK START                   ║
+╚═══════════════════════════════════════════════════════════════════════════╝
+
+🎯 WHAT WAS DONE:
+✅ Integrated Cloudinary for permanent file storage
+✅ Updated multer to support both local and cloud storage
+✅ Modified resume parser to handle Cloudinary URLs
+✅ Updated frontend to display Cloudinary-hosted resumes
+✅ Automatic fallback to local storage if Cloudinary not configured
+
+📋 NEXT STEPS (Required for Production):
+
+1️⃣  INSTALL PACKAGES
+   Run: backend\install-cloudinary.bat
+   Or manually: cd backend && npm install
+
+2️⃣  CREATE CLOUDINARY ACCOUNT
+   - Go to: https://cloudinary.com
+   - Sign up for free (25GB storage included)
+   - Get your credentials from the Dashboard
+
+3️⃣  UPDATE ENVIRONMENT VARIABLES
+
+   FOR LOCAL TESTING (backend/.env):
+   ───────────────────────────────────
+   CLOUDINARY_CLOUD_NAME=your-cloud-name
+   CLOUDINARY_API_KEY=your-api-key
+   CLOUDINARY_API_SECRET=your-api-secret
+
+   FOR RENDER DEPLOYMENT:
+   ───────────────────────────────────
+   Go to Render Dashboard → Your Service → Environment
+   Add the same 3 variables above
+
+4️⃣  REDEPLOY TO RENDER
+   After adding environment variables, trigger a new deployment
+
+🧪 HOW TO TEST:
+1. Upload a resume through your app
+2. Check the candidate's resumeUrl - should start with:
+   https://res.cloudinary.com/...
+3. Click "View Resume" - should open from Cloudinary
+
+⚠️  IMPORTANT NOTES:
+- Without Cloudinary: Files work locally but are LOST on Render restarts
+- With Cloudinary: Files are stored permanently in the cloud
+- The system automatically detects which storage to use
+
+📚 FULL DOCUMENTATION:
+See: backend/CLOUDINARY_SETUP.md
+
+🔍 VERIFICATION:
+- Local: Check console for "✅ Using Cloudinary storage for file uploads"
+- Cloudinary: Check Media Library → resumes folder for uploaded files
