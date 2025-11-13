@@ -26,4 +26,14 @@ export const cloudinaryStorage = new CloudinaryStorage({
   }
 });
 
+// Helper function to convert Cloudinary URL for inline viewing
+export const getInlineViewUrl = (cloudinaryUrl) => {
+  if (!cloudinaryUrl || !cloudinaryUrl.includes('cloudinary.com')) {
+    return cloudinaryUrl;
+  }
+  
+  // Replace /upload/ with /upload/fl_attachment/ to force inline display
+  return cloudinaryUrl.replace('/upload/', '/upload/fl_attachment/');
+};
+
 export default cloudinary;

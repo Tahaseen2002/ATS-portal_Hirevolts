@@ -7,7 +7,8 @@ import {
   createCandidateWithResume,
   parseResumeOnly,
   updateCandidate,
-  deleteCandidate
+  deleteCandidate,
+  viewResume
 } from '../controllers/candidateController.js';
 
 const router = express.Router();
@@ -313,5 +314,57 @@ router.put('/:id', updateCandidate);
  *         description: Server error
  */
 router.delete('/:id', deleteCandidate);
+
+/**
+ * @swagger
+ * /api/candidates/{id}/view-resume:
+ *   get:
+ *     summary: View candidate resume inline
+ *     tags: [Candidates]
+ *     description: |
+ *       Get candidate resume for inline viewing (no download).
+ *       
+ *       **Note:** This endpoint returns binary file data (PDF/DOC). 
+ *       Testing in Swagger may fail - use browser or frontend instead.
+ *       
+ *       Example: GET http://localhost:5000/api/candidates/YOUR_CANDIDATE_ID/view-resume
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: Candidate ID
+ *         example: "507f1f77bcf86cd799439011"
+ *     responses:
+ *       200:
+ *         description: Resume file (binary)
+ *         content:
+ *           application/pdf:
+ *             schema:
+ *               type: string
+ *               format: binary
+ *           application/msword:
+ *             schema:
+ *               type: string
+ *               format: binary
+ *           application/vnd.openxmlformats-officedocument.wordprocessingml.document:
+ *             schema:
+ *               type: string
+ *               format: binary
+ *       404:
+ *         description: Candidate or resume not found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Error'
+ *       500:
+ *         description: Server error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Error'
+ */
+router.get('/:id/view-resume', viewResume);
 
 export default router;
