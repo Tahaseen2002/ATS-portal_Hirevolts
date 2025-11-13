@@ -102,13 +102,13 @@ export default function CandidateDetail({ candidate, onEdit }: CandidateDetailPr
   const handleViewResume = () => {
     if (candidate.viewUrl) {
       // Use the viewUrl provided by backend
-      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+      const apiUrl = 'https://ats-portal-hirevolts.onrender.com';
       const fullUrl = `${apiUrl}${candidate.viewUrl}`;
       console.log('Opening resume at:', fullUrl); // Debug log
       window.open(fullUrl, '_blank');
     } else if (candidate.resumeUrl) {
       // Fallback: construct URL if viewUrl is not available
-      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+      const apiUrl = 'https://ats-portal-hirevolts.onrender.com';
       const viewUrl = `${apiUrl}/api/candidates/${candidate.id}/view-resume`;
       console.log('Opening resume at (fallback):', viewUrl); // Debug log
       window.open(viewUrl, '_blank');
@@ -287,9 +287,9 @@ export default function CandidateDetail({ candidate, onEdit }: CandidateDetailPr
                 <span>View Resume</span>
               </button>
             )}
-            <button className="w-full border border-blue-600 text-blue-600 py-2 px-4 text-sm sm:text-base hover:bg-blue-50 transition-colors">
+            {/* <button className="w-full border border-blue-600 text-blue-600 py-2 px-4 text-sm sm:text-base hover:bg-blue-50 transition-colors">
               Schedule Interview
-            </button>
+            </button> */}
             {candidate.resumeUrl && (
               <button 
                 onClick={handleDownloadResume}
@@ -298,9 +298,9 @@ export default function CandidateDetail({ candidate, onEdit }: CandidateDetailPr
                 Download Resume
               </button>
             )}
-            <button className="w-full border border-gray-300 text-gray-700 py-2 px-4 text-sm sm:text-base hover:bg-gray-50 transition-colors">
+            {/* <button className="w-full border border-gray-300 text-gray-700 py-2 px-4 text-sm sm:text-base hover:bg-gray-50 transition-colors">
               Send Email
-            </button>
+            </button> */}
           </div>
         </div>
       </div>
